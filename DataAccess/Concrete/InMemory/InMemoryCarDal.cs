@@ -15,17 +15,6 @@ namespace DataAccess.Concrete.InMemory
 
         public InMemoryCarDal()
         {
-            _brands = new List<Brand>
-            {
-                new Brand{BrandId = 1, BrandName = "Mercedes - Benz"},
-                new Brand{BrandId = 2, BrandName = "Audi"},
-                new Brand{BrandId = 3, BrandName = "Porsche"},
-                new Brand{BrandId = 4, BrandName = "Tesla"},
-                new Brand{BrandId = 5, BrandName = "Hyundai"},
-                new Brand{BrandId = 6, BrandName = "Toyota"},
-                new Brand{BrandId = 7, BrandName = "BMW"}
-            };
-
             _colors = new List<Color>
             {
                 new Color{ColorId = 1, ColorName = "Beyaz"},
@@ -46,6 +35,17 @@ namespace DataAccess.Concrete.InMemory
                 new Car{CarId = 5, BrandId =5, ColorId = 6, ModelYear = 2009, DailyPrice = 200, Description= "Sedan"},
                 new Car{CarId = 6, BrandId =3, ColorId = 6, ModelYear = 2014, DailyPrice = 750, Description= "Coupe"},
                 new Car{CarId = 7, BrandId =7, ColorId = 4, ModelYear = 2017, DailyPrice = 550, Description= "Coupe"},
+            };
+
+            _brands = new List<Brand>
+            {
+                new Brand{BrandId = 1, BrandName = "Mercedes - Benz"},
+                new Brand{BrandId = 2, BrandName = "Audi"},
+                new Brand{BrandId = 3, BrandName = "Porsche"},
+                new Brand{BrandId = 4, BrandName = "Tesla"},
+                new Brand{BrandId = 5, BrandName = "Hyundai"},
+                new Brand{BrandId = 6, BrandName = "Toyota"},
+                new Brand{BrandId = 7, BrandName = "BMW"}
             };
         }
         public void Add(Car car)

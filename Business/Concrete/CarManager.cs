@@ -10,10 +10,21 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
+        ICarDtoDal _carDtoDal;
+        IBrandDal _brandDal;
+        IColorDal _colorDal;
 
-        public CarManager(ICarDal carDal)
+        public List<CarDto> GetAllDto()
+        {
+            return _carDtoDal.GetAllDto(_carDal, _brandDal, _colorDal);
+        }
+
+        public CarManager(ICarDal carDal, ICarDtoDal carDtoDal, IBrandDal brandDal, IColorDal colorDal)
         {
             _carDal = carDal;
+            _carDtoDal = carDtoDal;
+            _brandDal = brandDal;
+            _colorDal = colorDal;
         }
 
         public List<Car> GetAll()
@@ -50,7 +61,5 @@ namespace Business.Concrete
         {
             return _carDal.GetByBrand(colorId);
         }
-
-
     }
 }
