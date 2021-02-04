@@ -10,21 +10,10 @@ namespace Business.Concrete
     public class CarManager : ICarService
     {
         ICarDal _carDal;
-        ICarDtoDal _carDtoDal;
-        IBrandDal _brandDal;
-        IColorDal _colorDal;
 
-        public List<CarDto> GetAllDto()
-        {
-            return _carDtoDal.GetAllDto(_carDal, _brandDal, _colorDal);
-        }
-
-        public CarManager(ICarDal carDal, ICarDtoDal carDtoDal, IBrandDal brandDal, IColorDal colorDal)
+        public CarManager(ICarDal carDal)
         {
             _carDal = carDal;
-            _carDtoDal = carDtoDal;
-            _brandDal = brandDal;
-            _colorDal = colorDal;
         }
 
         public List<Car> GetAll()
@@ -34,7 +23,14 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            _carDal.Add(car);
+            if (car.Description.Length < 2 || car.DailyPrice <= 0)
+            {
+                throw new Exception("Arabanın Açıklaması 2 Karakterden Fazla ve Ücreti 0 dan Büyük Olmalı");
+            }
+            else
+            {
+                _carDal.Add(car);
+            }
         }
 
         public void Update(Car car)
@@ -47,19 +43,19 @@ namespace Business.Concrete
             _carDal.Delete(car);
         }
 
-        public void GetById(int carId)
-        {
-            _carDal.GetById(carId);
-        }
-
         public List<Car> GetByBrand(int brandId)
         {
-            return _carDal.GetByBrand(brandId);
+            return _carDal.GetAll(c => c.BrandId == brandId);
         }
 
         public List<Car> GetByColor(int colorId)
         {
-            return _carDal.GetByBrand(colorId);
+            return _carDal.GetAll(c => c.ColorId == colorId);
+        }
+
+        public List<Car> GetByDailyPrice(decimal min, decimal max)
+        {
+            return _carDal.GetAll(c => c.DailyPrice >= min && c.DailyPrice <= max);
         }
     }
 }
