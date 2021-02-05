@@ -23,10 +23,15 @@ namespace Business.Concrete
 
         public void Add(Car car)
         {
-            if (car.Description.Length < 2 || car.DailyPrice <= 0)
+            if (car.Description.Length < 2)
             {
-                throw new Exception("Arabanın Açıklaması 2 Karakterden Fazla ve Ücreti 0 dan Büyük Olmalı");
+                Console.WriteLine("Arabanın Açıklamasını Kontrol Ediniz");
             }
+            if (car.DailyPrice <= 0)
+            {
+                Console.WriteLine("Arabanın Günlük Ücretini Kontrol Ediniz");
+            }
+
             else
             {
                 _carDal.Add(car);
